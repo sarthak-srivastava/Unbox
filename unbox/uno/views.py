@@ -11,21 +11,21 @@ def data_handling(budget, profession, gender, age, task, location, prefer_to_chi
     phones = {}
     for i in information:
         if budget == "Less than 5000":
-            if i[0] <= 10000:
+            if information[i][0] <= 10000:
                 phones[i] = information[i]
         elif budget == "Less than 10000":
-            if i[0] <= 15000:
+            if information[i][0] <= 15000:
                 phones[i] = information[i]
         elif budget == "Less than 20000":
-            if i[0] <= 25000 and i[0] >= 10000:
+            if information[i][0] <= 25000 and information[i][0] >= 10000:
                 phones[i] = information[i]
         elif budget == "Less than 50000":
-            if i[0] <= 55000 and i[0] >= 30000:
+            if information[i][0] <= 55000 and information[i][0] >= 30000:
                 phones[i] = information[i]
         elif budget == "No constraint":
-            if i[0] >= 30000:
+            if information[i][0] >= 30000:
                 phones[i] = information[i]
-        print(phones[i])
+        
 
 def index(request):
     context_dict = {'boldmessage': "Unbox"}
@@ -39,6 +39,7 @@ def question(request):
         if forma.is_valid():
 
             print("\nPrinting\n", forma.cleaned_data['budget'])
+            data_handling(forma.cleaned_data['budget'], forma.cleaned_data['profession'], forma.cleaned_data['gender'], forma.cleaned_data['age'], forma.cleaned_data['task'], forma.cleaned_data['location'], forma.cleaned_data['prefer_to_chinese'], forma.cleaned_data['majoruse'])
             forma.save(commit=True)
             return index(request)
 
