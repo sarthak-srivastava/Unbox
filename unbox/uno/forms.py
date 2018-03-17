@@ -2,11 +2,12 @@ from uno.models import Question_m
 from django import forms
 
 Budget = (
-    ('Less than 5000','Less than 5000'),
-    ('Less than 10000','Less than 10000'),
-    ('Less than 20000','Less than 20000'),
-    ('Less than 50000','Less than 50000'),
-    ('No constraint','No constraint'),
+    ('5000', '5000'),
+    ('10000','10000'),
+    ('15000','15000'),
+    ('20000','20000'),
+    ('30000','30000'),
+    ('Flagship','Flagship'),
 )
 
 Profession = (
@@ -43,11 +44,11 @@ Assertion = (
     ('No','No'),
 )
 Major_use = (
-    ("Calling","For Calling activity"),
-    ("Photography","For Photography"),
-    ("Gaming","For Gaming"),
-    ("Whatsapp","For Social Networking and texting"),
-    ("Movie","For watching movies and other media content..Ahem!Ahem!"),
+    ("Calling","Calling"),
+    ("Photography","Photography"),
+    ("Gaming","Gaming"),
+    ("Whatsapp","Whatsapp"),
+    ("Movie","Movie"),
     )
 class Question_f(forms.ModelForm):
     budget = forms.ChoiceField(choices=Budget, help_text="Budget")

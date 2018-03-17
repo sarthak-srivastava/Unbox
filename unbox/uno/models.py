@@ -2,11 +2,12 @@ from django.db import models
 import datetime
 
 Budget = (
-    ('Less than 5000','Less than 5000'),
-    ('Less than 10000','Less than 10000'),
-    ('Less than 20000','Less than 20000'),
-    ('Less than 50000','Less than 50000'),
-    ('No constraint','No constraint'),
+    ('5000', '5000'),
+    ('10000','10000'),
+    ('15000','15000'),
+    ('20000','20000'),
+    ('30000','30000'),
+    ('Flagship','Flagship'),
 )
 
 Profession = (
