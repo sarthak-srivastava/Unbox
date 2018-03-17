@@ -55,7 +55,7 @@ class Question_f(forms.ModelForm):
     gender = forms.ChoiceField(choices=Gender, help_text="Gender")
     age = forms.ChoiceField(choices=Age, help_text="Age")
     task = forms.ChoiceField(choices=Task, help_text="What is more important to you?")
-    Majoruse = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple, choices=Major_use, help_text="What do you use your tech mostly for?")
+    majoruse = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple, choices=Major_use, help_text="What do you use your tech mostly for?")
     location = forms.ChoiceField(choices=Location, help_text="Place of living")
 
     prefer_to_chinese = forms.ChoiceField(choices=Assertion, help_text="Will you prefer Chinese brands for better specification")
@@ -63,4 +63,4 @@ class Question_f(forms.ModelForm):
 
     class Meta:
         model = Question_m
-        fields = ['budget', 'profession', 'gender', 'age', 'task', 'location','location', 'prefer_to_chinese','Majoruse']
+        fields = ['budget', 'profession', 'gender', 'age', 'task', 'location', 'prefer_to_chinese','majoruse']
