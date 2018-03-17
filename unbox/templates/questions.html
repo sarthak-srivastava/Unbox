@@ -6,7 +6,7 @@
     <title>Add Scrap</title>
     <link rel="stylesheet" type="text/css" href="/static/admin/css/base.css">
       <link rel="stylesheet" type="text/css" href="/static/admin/css/login.css">
-      
+
     <style type="text/css">
 
 fieldset{
@@ -71,7 +71,7 @@ width: 100%;
           <div id="content" class="colM">
               <div id="content-main">
 
-      <form id="Quotation" method="post" action="/scr/quote/">
+      <form id="Question_f" method="post" action="/uno/questions/">
 
           {% csrf_token %}
         {% for hidden in form.hidden_fields %}
