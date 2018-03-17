@@ -42,7 +42,13 @@ Assertion = (
     ('Yes','Yes'),
     ('No','No'),
 )
-
+Majoruse = (
+    ("Calling","Calling"),
+    ("Photography","Photography"),
+    ("Gaming","Gaming"),
+    ("Whatsapp","Whatsapp"),
+    ("Movie","Movie"),
+    )
 
 class Question_m(models.Model):
     budget = models.CharField(max_length=100, choices=Budget, default='No constraint')

@@ -42,14 +42,20 @@ Assertion = (
     ('Yes','Yes'),
     ('No','No'),
 )
-
+Major_use = (
+    ("Calling","For Calling activity"),
+    ("Photography","For Photography"),
+    ("Gaming","For Gaming"),
+    ("Whatsapp","For Social Networking and texting"),
+    ("Movie","For watching movies and other media content..Ahem!Ahem!"),
+    )
 class Question_f(forms.ModelForm):
     budget = forms.ChoiceField(choices=Budget, help_text="Budget")
     profession = forms.ChoiceField(choices=Profession, help_text="Profession")
     gender = forms.ChoiceField(choices=Gender, help_text="Gender")
     age = forms.ChoiceField(choices=Age, help_text="Age")
     task = forms.ChoiceField(choices=Task, help_text="What is more important to you?")
-
+    Majoruse = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple, choices=Major_use, help_text="What do you use your tech mostly for?")
     location = forms.ChoiceField(choices=Location, help_text="Place of living")
 
     prefer_to_chinese = forms.ChoiceField(choices=Assertion, help_text="Will you prefer Chinese brands for better specification")
@@ -57,4 +63,4 @@ class Question_f(forms.ModelForm):
 
     class Meta:
         model = Question_m
-        fields = ['budget', 'profession', 'gender', 'age', 'task', 'location','location', 'prefer_to_chinese']
+        fields = ['budget', 'profession', 'gender', 'age', 'task', 'location','location', 'prefer_to_chinese','Majoruse']
