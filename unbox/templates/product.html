@@ -75,7 +75,11 @@
 
         <div class="center">
 
-        <h1 class="h1">Based on our Algorithm, best phone for you:</h1>
+        <h1 class="h1">{% for key, value in dictionary.items %}
+          {% if key == 'name' %}
+            {{value}}
+          {% endif %}
+        {% endfor %}</h1>
 
 
 <div class="first-screen__timer first-screen__timer--state-1 timer" style="display: none;">
@@ -163,7 +167,13 @@
                     <use class="rhombus-btn__figure" fill="url(#rhombus-btn__green)" xlink:href="#rhombus-btn__figure"></use>
                   </g>
                   <use class="rhombus-btn__ico" xlink:href="#rhombus-btn__ico-download"></use>
-                  <text class="rhombus-btn__text" text-anchor="middle" x="80" y="118">Whitepaper</text>
+                  <text class="rhombus-btn__text" text-anchor="middle" x="80" y="118">
+                    {% for key, value in dictionary.items %}
+                      {% if key == 'pro1' %}
+                        {{value}}
+                      {% endif %}
+                    {% endfor %}
+                  </text>
                 </a>
               </svg>
               <ul class="rhombus-btn__menu rhombus-btn__menu--whitepaper visuallyhidden">
@@ -198,7 +208,13 @@
                     <use class="rhombus-btn__figure" fill="url(#rhombus-btn__green)" xlink:href="#rhombus-btn__figure"></use>
                   </g>
                   <use class="rhombus-btn__ico" xlink:href="#rhombus-btn__ico-download"></use>
-                  <text class="rhombus-btn__text" text-anchor="middle" x="80" y="118">Prospectus</text>
+                  <text class="rhombus-btn__text" text-anchor="middle" x="80" y="118">
+                    {% for key, value in dictionary.items %}
+                      {% if key == 'pro2' %}
+                        {{value}}
+                      {% endif %}
+                    {% endfor %}
+                  </text>
                 </a>
               </svg>
               <ul class="rhombus-btn__menu rhombus-btn__menu--pros visuallyhidden">
@@ -258,7 +274,11 @@
                   </g>
                   <use class="rhombus-btn__ico rhombus-btn__ico--play" xlink:href="#rhombus-btn__ico-play"></use>
                   <text class="rhombus-btn__text" text-anchor="middle" x="80" y="118">
-                    Video
+                    {% for key, value in dictionary.items %}
+                      {% if key == 'con' %}
+                        {{value}}
+                      {% endif %}
+                    {% endfor %}
                   </text>
 
                 </a>
@@ -276,7 +296,13 @@
                     <use class="rhombus-btn__figure" fill="url(#rhombus-btn__green)" xlink:href="#rhombus-btn__figure"></use>
                   </g>
                   <use class="rhombus-btn__ico" xlink:href="#rhombus-btn__ico-download"></use>
-                  <text class="rhombus-btn__text" text-anchor="middle" x="80" y="118">Onepager</text>
+                  <text class="rhombus-btn__text" text-anchor="middle" x="80" y="118">
+                    {% for key, value in dictionary.items %}
+                      {% if key == 'pro3' %}
+                        {{value}}
+                      {% endif %}
+                    {% endfor %}
+                  </text>
                 </a>
               </svg>
               <ul class="rhombus-btn__menu rhombus-btn__menu--onepager visuallyhidden">
@@ -598,8 +624,7 @@
 
                         <h5 class="team__name">Sarthak Srivastava</h5>
 
-                        <p class="team__status">Token model development, investment and financial management,
-                            co-founder</p>
+                        <p class="team__status">chief design officer, machine learning engineer</p>
 
                         <div class="team__box">
 

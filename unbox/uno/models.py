@@ -6,15 +6,15 @@ Budget = (
     ('10000','10000'),
     ('15000','15000'),
     ('20000','20000'),
-    ('30000','30000'),
+    ('40000','40000'),
     ('Flagship','Flagship'),
 )
 
 Profession = (
-    ('IT','IT'),
-    ('Engineer','Engineer'),
-    ('Doctor','Doctor'),
-    ('BusinessMan','BuisnessMan'),
+    ('Student','Student'),
+    ('Job','Job'),
+    ('Business','Buisness'),
+    ('Elderly Person','Elderly Person'),
 )
 
 Gender = (
@@ -43,12 +43,13 @@ Assertion = (
     ('Yes','Yes'),
     ('No','No'),
 )
-Majoruse = (
-    ("Calling","Calling"),
-    ("Photography","Photography"),
-    ("Gaming","Gaming"),
-    ("Whatsapp","Whatsapp"),
-    ("Movie","Movie"),
+
+Major_use = (
+    ('Calling','Calling'),
+    ('Photography','Photography'),
+    ('Gaming','Gaming'),
+    ('Whatsapp','Whatsapp'),
+    ('Movie','Movie'),
     )
 
 class Question_m(models.Model):
@@ -61,6 +62,9 @@ class Question_m(models.Model):
     location = models.CharField(max_length=100, choices=Location, default='Urban')
 
     prefer_to_chinese = models.CharField(max_length=100, choices=Assertion, default='No')
+
+    #majoruse = models.CharField(max_length=100, choices=Major_use, default='No')
+    size = models.CharField(max_length=100, choices=Assertion, default='No')
 
     class Meta:
       verbose_name_plural = 'Questions'

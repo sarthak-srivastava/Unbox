@@ -45,11 +45,11 @@ Assertion = (
 )
 
 Major_use = (
-    ("Calling","Calling"),
-    ("Photography","Photography"),
-    ("Gaming","Gaming"),
-    ("Whatsapp","Whatsapp"),
-    ("Movie","Movie"),
+    ('Calling','Calling'),
+    ('Photography','Photography'),
+    ('Gaming','Gaming'),
+    ('Whatsapp','Whatsapp'),
+    ('Movie','Movie'),
     )
 
 class Question_f(forms.ModelForm):
@@ -66,4 +66,4 @@ class Question_f(forms.ModelForm):
 
     class Meta:
         model = Question_m
-        fields = ['budget', 'profession', 'gender', 'age', 'task', 'location', 'prefer_to_chinese','majoruse']
+        fields = ['budget', 'profession', 'gender', 'age', 'task', 'location', 'prefer_to_chinese','majoruse', 'size']

@@ -1,13 +1,21 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, render_to_response, RequestContext
 from uno.models import Question_m
 from django.views.generic import FormView
 from uno.forms import Question_f
 import requests
 from uno.info import information
 from copy import deepcopy
+#from django.template.defaulttags import register
 
+pro = []
+'''
+@register.filter
+def get_item(dictionary, key):
+    return dictionary.get(key)
+'''
 def data_handling(budget, profession, gender, age, task, location, prefer_to_chinese, majoruse):
+    global pro
     phones = {}
     score = [0, 0, 0, 0, 0, 0, 0]
     for i in information:
@@ -82,13 +90,14 @@ def data_handling(budget, profession, gender, age, task, location, prefer_to_chi
     top_three = []
     if len(score) <= 3:
         for i in phones:
-            top_three.append([i, phones[i][0], calculate(phones[i][1], score) ,phones[i][2], phones[i][3]]);
+            top_three.append([i, phones[i][0], calculate(phones[i][1], score) ,phones[i][2], phones[i][3], phones[i][4], phones[i][5]])
         top_three.sort(key=lambda x: x[2], reverse=True)
     else:
         for i in phones:
-            top_three.append([i, phones[i][0], calculate(phones[i][1], score) ,phones[i][2], phones[i][3]]);
+            top_three.append([i, phones[i][0], calculate(phones[i][1], score) ,phones[i][2], phones[i][3], phones[i][4], phones[i][5]])
         top_three.sort(key=lambda x: x[2], reverse=True)
         top_three = top_three[:3]
+    pro = deepcopy(top_three)
     for i in range(len(top_three)):
         print(top_three[i])
 
@@ -109,10 +118,9 @@ def question(request):
         forma = Question_f(request.POST)
         if forma.is_valid():
 
-            print("\nPrinting\n", forma.cleaned_data)
             data_handling(forma.cleaned_data['budget'], forma.cleaned_data['profession'], forma.cleaned_data['gender'], forma.cleaned_data['age'], forma.cleaned_data['task'], forma.cleaned_data['location'], forma.cleaned_data['prefer_to_chinese'], forma.cleaned_data['majoruse'])
             forma.save(commit=True)
-            return index(request)
+            return product(request)
 
         else:
             print(forma.errors)
@@ -120,5 +128,11 @@ def question(request):
     return render(request, 'questions.html', {'form': forma})
 
 def product(request):
-    context_dict = {'boldmessage': "Unbox"}
-    return render(request, 'product.html', context=context_dict)
+    print("\n","Here is the global data",pro[0][4],"\n")
+
+    context_dict = {'name': pro[0][5], 'price':pro[0][1], 'pro1':pro[0][3][0], 'pro2':pro[0][3][1], 'pro3':pro[0][3][2], 'con':pro[0][4][0], 'link':pro[0][5]}
+    return render_to_response('product.html', {'dictionary': context_dict}, context_instance=RequestContext(request))
+
+def test(request):
+    context_dict = {'bold': "Unbox", 'hello':"hola"}
+    return render_to_response('test.html', {'dictionary': context_dict}, context_instance=RequestContext(request))
