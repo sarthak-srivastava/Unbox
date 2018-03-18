@@ -12,73 +12,68 @@ def data_handling(budget, profession, gender, age, task, location, prefer_to_chi
     score = [0, 0, 0, 0, 0, 0, 0]
     for i in information:
         if budget == "5000":
-            if information[i][0] <= 10000:
+            if information[i][0] <= 7000:
                 phones[i] = information[i]
-        elif budget == "Less than 10000":
-            if information[i][0] <= 15000:
+        elif budget == "10000":
+            if information[i][0] <= 13000 and information[i][0] >= 7000:
                 phones[i] = information[i]
-        elif budget == "Less than 20000":
-            if information[i][0] <= 25000 and information[i][0] >= 10000:
+        elif budget == "15000":
+            if information[i][0] <= 17000 and information[i][0] >= 12000:
                 phones[i] = information[i]
-        elif budget == "Less than 50000":
-            if information[i][0] <= 55000 and information[i][0] >= 30000:
+        elif budget == "20000":
+            if information[i][0] <= 25000 and information[i][0] >= 17000:
                 phones[i] = information[i]
-        elif budget == "No constraint":
-            if information[i][0] >= 30000:
+        elif budget == "30000":
+            if information[i][0] <= 35000 and information[i][0] >= 25000:
                 phones[i] = information[i]
+        elif budget == "40000":
+            if information[i][0] <= 45000 and information[i][0] >= 35000:
+                phones[i] = information[i]
+        elif budget == "Flagship":
+            if gender == "Male":
+                phones['GalaxyS9'] = information['GalaxyS9']
+            else:
+                phones['IphoneX'] = information['IphoneX']
+            break
 
-    if profession == "IT":
-        score[3] = 4
-        score[6] = 0
-        score[2] = 3
-        score[5] = 4
-    elif profession == "Engineer":
+    if profession == "Student":
         score[3] = 3
-        score[6] = 3
-        score[2] = 0
+        score[4] = 3
         score[5] = 4
-    elif profession == "Doctor":
-        score[3] = 0
+
+    elif profession == "Job":
         score[6] = 3
-        score[2] = 4
-        score[5] = 3
-    elif profession == "BusinessMan":
-        score[3] = 0
+        score[4] = 4
+        score[1] = 3
+
+    elif profession == "Business":
         score[6] = 4
         score[2] = 3
-        score[5] = 4
+        score[1] = 3
 
-    if gender == "male":
+    elif profession == "Elderly Person":
         score[3] = 4
-        score[4] = score[4]
-    elif gender == "female":
-        score[3] = score[3]
-        score[4] = 4
+        score[6] = 3
+        score[2] = 3
 
-    if age == "20-30":
+    if gender == "Male":
         score[5] = 4
-        #score[6] =
+        score[1] = 3
+    elif gender == "Female":
+        score[2] = 3
         score[4] = 4
-    elif age == "30-40":
-        score[5] = 3
-        score[6] = 4
-        #score[4] =
 
     if task == "Battery Life":
-        score[6] += 1
-        score[4] -= 1
+        score[6] = 4
     elif task == "Camera":
-        score[6] -= 1
-        score[4] += 1
+        score[4] = 4
 
     if location == "Urban":
         score[0] = 4
 
-    elif location == "Rural":
-        score[0] = 3
-
     if prefer_to_chinese == "Yes":
         score[0] = 3
+
 
     for i in range(7):
         if score[i] < 0:
@@ -94,7 +89,7 @@ def data_handling(budget, profession, gender, age, task, location, prefer_to_chi
             top_three.append([i, phones[i][0], calculate(phones[i][1], score) ,phones[i][2], phones[i][3]]);
         top_three.sort(key=lambda x: x[2], reverse=True)
         top_three = top_three[:3]
-    for i in range(3):
+    for i in range(len(top_three)):
         print(top_three[i])
 
 def calculate(a, b):
@@ -123,3 +118,7 @@ def question(request):
             print(forma.errors)
 
     return render(request, 'questions.html', {'form': forma})
+
+def product(request):
+    context_dict = {'boldmessage': "Unbox"}
+    return render(request, 'product.html', context=context_dict)

@@ -6,15 +6,15 @@ Budget = (
     ('10000','10000'),
     ('15000','15000'),
     ('20000','20000'),
-    ('30000','30000'),
+    ('40000','40000'),
     ('Flagship','Flagship'),
 )
 
 Profession = (
-    ('IT','IT'),
-    ('Engineer','Engineer'),
-    ('Doctor','Doctor'),
-    ('BusinessMan','BuisnessMan'),
+    ('Student','Student'),
+    ('Job','Job'),
+    ('Business','Buisness'),
+    ('Elderly Person','Elderly Person'),
 )
 
 Gender = (
@@ -43,6 +43,7 @@ Assertion = (
     ('Yes','Yes'),
     ('No','No'),
 )
+
 Major_use = (
     ("Calling","Calling"),
     ("Photography","Photography"),
@@ -50,6 +51,7 @@ Major_use = (
     ("Whatsapp","Whatsapp"),
     ("Movie","Movie"),
     )
+
 class Question_f(forms.ModelForm):
     budget = forms.ChoiceField(choices=Budget, help_text="Budget")
     profession = forms.ChoiceField(choices=Profession, help_text="Profession")
@@ -58,7 +60,7 @@ class Question_f(forms.ModelForm):
     task = forms.ChoiceField(choices=Task, help_text="What is more important to you?")
     majoruse = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple, choices=Major_use, help_text="What do you use your tech mostly for?")
     location = forms.ChoiceField(choices=Location, help_text="Place of living")
-
+    size = forms.ChoiceField(choices=Assertion, help_text="Will you prefer small compact phones?")
     prefer_to_chinese = forms.ChoiceField(choices=Assertion, help_text="Will you prefer Chinese brands for better specification")
 
 
