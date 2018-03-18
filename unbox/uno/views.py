@@ -129,9 +129,13 @@ def question(request):
 
 def product(request):
     print("\n","Here is the global data",pro[0][4],"\n")
+    try:
+        context_dict = {'name': pro[0][5], 'price':pro[0][1], 'pro1':pro[0][3][0], 'pro2':pro[0][3][1], 'pro3':pro[0][3][2], 'con':pro[0][4][0], 'link':pro[0][5]}
+        return render_to_response('product.html', {'dictionary': context_dict}, context_instance=RequestContext(request))
+    except:
+        context_dict = {'name': OnePlus5T, 'price':32000, 'pro1':Camera, 'pro2':Battery, 'pro3':Latest, 'con':Brand, 'link':pro[0][5]}
+        return render_to_response('product.html', {'dictionary': context_dict}, context_instance=RequestContext(request))
 
-    context_dict = {'name': pro[0][5], 'price':pro[0][1], 'pro1':pro[0][3][0], 'pro2':pro[0][3][1], 'pro3':pro[0][3][2], 'con':pro[0][4][0], 'link':pro[0][5]}
-    return render_to_response('product.html', {'dictionary': context_dict}, context_instance=RequestContext(request))
 
 def test(request):
     context_dict = {'bold': "Unbox", 'hello':"hola"}
