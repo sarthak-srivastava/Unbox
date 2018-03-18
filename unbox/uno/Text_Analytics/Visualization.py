@@ -1,34 +1,34 @@
 
 # coding: utf-8
 
-# In[17]:
+# In[1]:
 
 
 import requests
 from pprint import pprint
 
 
-# In[11]:
+# In[2]:
 
 
 text_analytics_base_url = "https://southeastasia.api.cognitive.microsoft.com/text/analytics/v2.0/"
 
 
-# In[12]:
+# In[3]:
 
 
 subscription_key = 'bed5d202ad2342fabdad64f1174c71a4'
 assert subscription_key
 
 
-# In[13]:
+# In[4]:
 
 
 key_phrase_api_url = text_analytics_base_url + "keyPhrases"
 print(key_phrase_api_url)
 
 
-# In[19]:
+# In[5]:
 
 
 #Data
@@ -65,7 +65,7 @@ documents = {'documents':[
 ]}
 
 
-# In[20]:
+# In[6]:
 
 
 headers   = {"Ocp-Apim-Subscription-Key": subscription_key}
@@ -74,7 +74,7 @@ key_phrases = response.json()
 pprint(key_phrases)
 
 
-# In[21]:
+# In[7]:
 
 
 P =""
@@ -84,13 +84,13 @@ for document in key_phrases["documents"]:
     P = P+phrases
 
 
-# In[30]:
+# In[8]:
 
 
 P
 
 
-# In[5]:
+# In[9]:
 
 
 import pandas as pd
@@ -108,7 +108,7 @@ get_ipython().run_line_magic('matplotlib', 'inline')
 data = pd.read_csv('train.csv').sample(50000, random_state=23)
 
 
-# In[29]:
+# In[10]:
 
 
 STOP_WORDS = nltk.corpus.stopwords.words()
@@ -138,19 +138,19 @@ data = clean_dataframe(data)
 data.head(5)
 
 
-# In[66]:
+# In[11]:
 
 
 t = int(len(P)/100)
 
 
-# In[73]:
+# In[12]:
 
 
 d =int(t)*[[]]
 
 
-# In[74]:
+# In[13]:
 
 
 import nltk
@@ -169,7 +169,7 @@ for i in nltk.word_tokenize(P):
 d
 
 
-# In[53]:
+# In[14]:
 
 
 def build_corpus(data):
@@ -186,19 +186,13 @@ corpus = build_corpus(data)
 corpus[0:2]
 
 
-# In[75]:
+# In[15]:
 
 
 model = word2vec.Word2Vec(d, size=100)
 
 
-# In[58]:
-
-
-corpus
-
-
-# In[60]:
+# In[16]:
 
 
 def tsne_plot(model):
@@ -231,8 +225,57 @@ def tsne_plot(model):
     plt.show()
 
 
-# In[76]:
+# In[17]:
 
 
 tsne_plot(model)
+
+
+# In[19]:
+
+
+X = model[model.wv.vocab]
+
+
+# In[21]:
+
+
+from nltk.cluster import KMeansClusterer
+import nltk
+NUM_CLUSTERS=7
+kclusterer = KMeansClusterer(NUM_CLUSTERS, distance=nltk.cluster.util.cosine_distance, repeats=25)
+assigned_clusters = kclusterer.cluster(X, assign_clusters=True)
+print (assigned_clusters)
+
+
+# In[23]:
+
+
+words = list(model.wv.vocab)
+for i, word in enumerate(words):  
+    print (word + ":" + str(assigned_clusters[i]))
+
+
+# In[24]:
+
+
+from matplotlib import pyplot as plt
+from scipy.cluster.hierarchy import dendrogram, linkage
+
+l = linkage(model.wv.syn0, method='complete', metric='seuclidean')
+
+# calculate full dendrogram
+plt.figure(figsize=(25, 10))
+plt.title('Hierarchical Clustering Dendrogram')
+plt.ylabel('word')
+plt.xlabel('distance')
+
+dendrogram(
+    l,
+    leaf_rotation=90.,  # rotates the x axis labels
+    leaf_font_size=16.,  # font size for the x axis labels
+    orientation='left',
+    leaf_label_func=lambda v: str(model.wv.index2word[v])
+)
+plt.show()
 
